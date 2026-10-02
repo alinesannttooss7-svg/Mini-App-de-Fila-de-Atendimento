@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Histórico de Atendimentos</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <h1>Histórico de Atendimentos</h1>
+
+            <p>
+                Atendimentos concluídos e cancelados
+            </p>
+
+        </header>
+
+
+        <div class="acoes-topo">
+
+            <a
+                href="{{ url_for('index') }}"
+                class="botao historico"
+            >
+                Voltar para fila
+            </a>
+
+        </div>
+
+
+        <section class="card">
+
+            {% if clientes %}
+
+            <div class="tabela">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Prioridade</th>
+                            <th>Status</th>
+                            <th>Entrada</th>
+                            <th>Finalização</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for cliente in clientes %}
+
+                        <tr>
+
+                            <td>
+                                {{ cliente.id }}
+                            </td>
+
+                            <td>
+                                {{ cliente.nome }}
+                            </td>
+
+                            <td>
+                                {{ cliente.prioridade }}
+                            </td>
+
+                            <td>
+
+                                {% if cliente.status == "Concluído" %}
+
+                                    <span class="concluido">
+                                        Concluído
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="cancelado">
+                                        Cancelado
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ cliente.data_entrada }}
+                            </td>
+
+                            <td>
+                                {{ cliente.data_finalizacao }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="fila-vazia">
+
+                <h3>Histórico vazio</h3>
+
+                <p>
+                    Ainda não existem atendimentos finalizados.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

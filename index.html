@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fila de Atendimento</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <!-- Atualiza automaticamente a página a cada 10 segundos -->
+    <meta http-equiv="refresh" content="10">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Fila de Atendimento</h1>
+
+            <p>
+                Sistema de gerenciamento de clientes
+            </p>
+        </header>
+
+
+        <section class="card">
+
+            <h2>Adicionar cliente</h2>
+
+            <form
+                action="{{ url_for('adicionar') }}"
+                method="POST"
+            >
+
+                <input
+                    type="text"
+                    name="nome"
+                    placeholder="Nome do cliente"
+                    required
+                >
+
+                <select name="prioridade">
+
+                    <option value="Normal">
+                        Normal
+                    </option>
+
+                    <option value="Preferencial">
+                        Preferencial
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Adicionar à fila
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <div class="acoes-topo">
+
+            <a
+                href="{{ url_for('chamar_proximo') }}"
+                class="botao chamar"
+            >
+                Chamar próximo
+            </a>
+
+            <a
+                href="{{ url_for('historico') }}"
+                class="botao historico"
+            >
+                Histórico
+            </a>
+
+        </div>
+
+
+        <section class="card">
+
+            <h2>Fila de espera</h2>
+
+            {% if clientes %}
+
+                <div class="tabela">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Posição</th>
+                                <th>Cliente</th>
+                                <th>Prioridade</th>
+                                <th>Status</th>
+                                <th>Entrada</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for cliente in clientes %}
+
+                            <tr>
+
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+
+                                <td>
+                                    {{ cliente.nome }}
+                                </td>
+
+                                <td>
+
+                                    {% if cliente.prioridade == "Preferencial" %}
+
+                                        <span class="preferencial">
+                                            Preferencial
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="normal">
+                                            Normal
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    {% if cliente.status == "Aguardando" %}
+
+                                        <span class="aguardando">
+                                            Aguardando
+                                        </span>
+
+                                    {% elif cliente.status == "Em Atendimento" %}
+
+                                        <span class="atendimento">
+                                            Em Atendimento
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+                                    {{ cliente.data_entrada }}
+                                </td>
+
+                                <td class="acoes">
+
+                                    {% if cliente.status == "Aguardando" %}
+
+                                    <a
+                                        href="{{ url_for(
+                                            'alterar_status',
+                                            id=cliente.id,
+                                            novo_status='Em Atendimento'
+                                        ) }}"
+                                        class="acao atender"
+                                    >
+                                        Atender
+                                    </a>
+
+                                    {% endif %}
+
+
+                                    {% if cliente.status == "Em Atendimento" %}
+
+                                    <a
+                                        href="{{ url_for(
+                                            'alterar_status',
+                                            id=cliente.id,
+                                            novo_status='Concluído'
+                                        ) }}"
+                                        class="acao concluir"
+                                    >
+                                        Concluir
+                                    </a>
+
+                                    {% endif %}
+
+
+                                    <a
+                                        href="{{ url_for(
+                                            'cancelar',
+                                            id=cliente.id
+                                        ) }}"
+                                        class="acao cancelar"
+                                        onclick="
+                                            return confirm(
+                                                'Deseja cancelar este atendimento?'
+                                            )
+                                        "
+                                    >
+                                        Cancelar
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="fila-vazia">
+
+                    <h3>Nenhum cliente na fila</h3>
+
+                    <p>
+                        Adicione um cliente para iniciar os atendimentos.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

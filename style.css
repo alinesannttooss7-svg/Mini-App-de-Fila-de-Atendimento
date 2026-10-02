@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3f5f9;
+    color: #1f2937;
+}
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #6b7280;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+input {
+    flex: 1;
+    min-width: 200px;
+}
+
+select {
+    min-width: 150px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+.acoes-topo {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.botao {
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.chamar {
+    background-color: #16a34a;
+}
+
+.chamar:hover {
+    background-color: #15803d;
+}
+
+.historico {
+    background-color: #374151;
+}
+
+.historico:hover {
+    background-color: #1f2937;
+}
+
+.tabela {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f9fafb;
+    text-align: left;
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+    background-color: #f9fafb;
+}
+
+.preferencial,
+.normal,
+.aguardando,
+.atendimento,
+.concluido,
+.cancelado {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.preferencial {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.normal {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.aguardando {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.atendimento {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.concluido {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.cancelado {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.acoes {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.acao {
+    padding: 7px 10px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.atender {
+    background-color: #2563eb;
+}
+
+.concluir {
+    background-color: #16a34a;
+}
+
+.cancelar {
+    background-color: #dc2626;
+}
+
+.fila-vazia {
+    text-align: center;
+    padding: 40px;
+}
+
+.fila-vazia h3 {
+    margin-bottom: 8px;
+}
+
+.fila-vazia p {
+    color: #6b7280;
+}
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 96%;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    input,
+    select,
+    button {
+        width: 100%;
+    }
+}
